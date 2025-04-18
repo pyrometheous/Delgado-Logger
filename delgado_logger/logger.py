@@ -9,17 +9,22 @@ LOGFILE = "log.txt"
 END_SCRIPT = "\n-------------\\  End of Script  /--------------\n\n"
 START_SCRIPT = "-------------/ Start of Script \\--------------"
 
+
 def line_number():
     return currentframe().f_back.f_lineno
+
 
 def now_date():
     return str(strftime("%m/%d/%Y"))
 
+
 def date_filename():
     return str(strftime("%Y.%m.%d"))
 
+
 def now_time():
     return strftime("%I:%M:%S %p %Z", localtime())
+
 
 def write_to_logfile(log_text: str, log_filename=None):
     if log_filename is None:
@@ -38,6 +43,7 @@ def write_to_logfile(log_text: str, log_filename=None):
     logfile.close()
     print(log)
 
+
 def error_handler(error: str, line_num: int):
     stack = extract_stack()
     filename, line_no, function_name, code = stack[-2]
@@ -46,11 +52,13 @@ def error_handler(error: str, line_num: int):
     write_to_logfile(e)
     return e
 
+
 def engage():
     stack = extract_stack()
     filename, line_no, function_name, code = stack[-2]
     filename = filename.split("/")[-1].split("\\")[-1]
     write_to_logfile(f"Starting Script: {filename}")
+
 
 def end_of_line():
     stack = extract_stack()
@@ -58,10 +66,12 @@ def end_of_line():
     filename = filename.split("/")[-1].split("\\")[-1]
     write_to_logfile(f"Ending Script: {filename}")
 
+
 def create_new_output_file(filename: str):
     write_to_logfile('Creating File: "' + filename + '"')
     with open(filename, "w", newline="\n") as file:
         csv_writer(file)
+
 
 def write_to_file(filename: str, entry: list):
     log_text = f'Writing Data to: "{filename}"'
@@ -74,6 +84,7 @@ def write_to_file(filename: str, entry: list):
         except UnicodeEncodeError:
             writer.writerow(["UnicodeEncodeError"])
 
+
 def last_line_of_file(filename: str):
     with open(filename, "rb") as f:
         try:
@@ -85,6 +96,7 @@ def last_line_of_file(filename: str):
         last_line = f.readline().decode()
     return str(last_line)
 
+
 def print_value_info(value):
     stack = extract_stack()
     filename, line_no, function_name, code = stack[-2]
@@ -93,6 +105,7 @@ def print_value_info(value):
     print(
         f"{vars_name}:\n Type: {type(value)}\n Value = {value}\n Line: {line_no}\n Filename: {filename}"
     )
+
 
 def remove_old_files(file_extension, directory):
     file_extension = f".{file_extension}"
