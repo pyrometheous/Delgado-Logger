@@ -4,6 +4,7 @@ from os import SEEK_END, SEEK_CUR, listdir, remove, path
 from csv import writer as csv_writer
 from re import compile as re_compile
 from traceback import extract_stack
+from black import format_str, Mode
 
 LOGFILE = "log.txt"
 END_SCRIPT = "\n-------------\\  End of Script  /--------------\n\n"
@@ -102,8 +103,9 @@ def print_value_info(value):
     filename, line_no, function_name, code = stack[-2]
     filename = filename.split("/")[-1].split("\\")[-1]
     vars_name = re_compile(r"\((.*?)\).*$").search(code).groups()[0]
+    value = format_str(str(value), mode=Mode())
     print(
-        f"{vars_name}:\n Type: {type(value)}\n Value = {value}\n Line: {line_no}\n Filename: {filename}"
+        f"{vars_name}:\n Line: {line_no}\n Filename: {filename}\n Type: {type(value)}\n Value = {value}\n"
     )
 
 
