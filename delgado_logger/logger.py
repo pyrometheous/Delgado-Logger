@@ -103,7 +103,7 @@ def print_value_info(value):
     filename, line_no, function_name, code = stack[-2]
     filename = filename.split("/")[-1].split("\\")[-1]
     vars_name = re_compile(r"\((.*?)\).*$").search(code).groups()[0]
-    value = format_str(str(value), mode=Mode())
+    value = format_str(str(value), mode=Mode()).replace("\\n", "\n")
     print(
         f"{vars_name}:\n Line: {line_no}\n Filename: {filename}\n Type: {type(value)}\n Value = {value}\n"
     )
