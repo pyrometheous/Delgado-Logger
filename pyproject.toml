@@ -2,22 +2,16 @@
 requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
+[project]
+name = "delgado_logger"
+version = "0.1.0"
+description = "A lightweight logging utility with value inspection and optional Black formatting."
+authors = [{ name = "Your Name", email = "you@example.com" }]
+dependencies = [
+    "black>=24.0.0"
+]
 
 [tool.black]
 line-length = 88
 target-version = ['py311']
 include = '\.pyi?$'
-exclude = '''
-/(
-    \.eggs
-  | \.git
-  | \.hg
-  | \.mypy_cache
-  | \.tox
-  | \.venv
-  | _build
-  | buck-out
-  | build
-  | dist
-)/
-'''

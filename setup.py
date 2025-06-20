@@ -6,7 +6,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name='delgado_logger',
-    version='1.1',
+    version='1.2',
     author='Delgado',
     description='A lightweight and human-readable logging and CSV utility',
     long_description=long_description,
